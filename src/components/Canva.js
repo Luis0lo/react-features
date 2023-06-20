@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// import Konva from "konva";
-import { Stage, Layer, Group, Line, Rect, Circle } from "react-konva";
+import { Stage, Layer, Line, Circle } from "react-konva";
 
 const Canva = () => {
   const [points, setPoints] = useState([]);
