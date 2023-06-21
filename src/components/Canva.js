@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Stage, Layer, Line, Circle } from "react-konva";
+import { Box } from "@mui/material";
+
 
 const Canva = () => {
   const [points, setPoints] = useState([]);
@@ -10,14 +12,12 @@ const Canva = () => {
   const getMousePos = stage => {
     return [stage.getPointerPosition().x, stage.getPointerPosition().y];
   };
-
   const handleClick = event => {
     const stage = event.target.getStage();
     const mousePos = getMousePos(stage);
 
-    if (isFinished) {
-      return;
-    }
+    if (isFinished) return;
+    
     if (isMouseOverStartPoint && points.length >= 3) {
       setIsFinished(true);
     } else {
@@ -63,12 +63,24 @@ const Canva = () => {
     .reduce((a, b) => a.concat(b), []);
 
   return (
+    
+<Box sx={{ display: 'flex',justifyContent: 'center', flexWrap: 'wrap',border: 1,borderColor: 'grey.500', m: 5 }}>
+
+<Box sx={{pr:{md:5}}}>
+    <h1>Canva Line Demo</h1>
+    <p>Build any shape by cliking in the canvas </p>
+    <p>Finish the shape by closing it</p>
+    <p>Adjust the shape by holding the points</p>
+</Box>
     <Stage
-      width={window.innerWidth}
-      height={window.innerHeight}
+    //   width={window.innerWidth}
+    //   height={window.innerHeight}
+      width={300}
+      height={500}
       onMouseDown={handleClick}
       onMouseMove={handleMouseMove}
-      draggable={true}
+      style={{ backgroundColor: 'lightblue' }}
+
     >
       <Layer>
         <Line
@@ -76,7 +88,9 @@ const Canva = () => {
           stroke="black"
           strokeWidth={2}
           closed={isFinished}
-          lineJoin="round"
+          lineJoin="round"      
+          fill="aquamarine"
+
         />
         {points.map((point, index) => {
           const width = 8;
@@ -110,6 +124,7 @@ const Canva = () => {
         })}
       </Layer>
     </Stage>
+</Box>
   );
 };
 
